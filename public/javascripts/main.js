@@ -10,4 +10,5 @@ function getLeagueInfo() {
 
 socket.on('league', function(data) {
 	console.log(data);
+	document.getElementById('league-info').innerHTML = data.champions[0].id;
 });
