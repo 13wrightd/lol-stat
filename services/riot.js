@@ -32,10 +32,13 @@ riot.getChampions = function() {
         };
 
         var request = https.request(options, function(response) {
-            response.on('data', function(raw_data) {
-                var data = raw_data.toString();
-                console.log(data);
-                resolve(data);
+            var final_data;
+            response.on('data', function(chunk) {
+                final_data += chunk;
+            });
+
+            response.on('end', function() {
+                resolve(final_data.toString());
             });
         });
         request.end();

@@ -21,12 +21,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-/* Socket.io */
-
-console.log('Attempting to setup socket.io');
-
-
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -34,15 +28,11 @@ console.log('Attempting to setup socket.io');
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-var io = require('socket.io')(server);
-// var socketFunctions = require('../routes/socket_functions.js')(io);
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function() {
-      console.log('a user quit');
-    });
-  });
+/* Socket.io */
+
+var io = require('socket.io')(server);
+var socketFunctions = require('../routes/socket_functions.js')(io);
 
 /**
  * Normalize a port into a number, string, or false.
