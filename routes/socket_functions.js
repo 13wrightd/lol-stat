@@ -7,7 +7,10 @@ module.exports = function(io) {
         console.log('a user connected');
 
         socket.on('league', function() {
-            riot.getChampions().then(function(data) {
+            // riot.getChampions().then(function(data) {
+            //     socket.emit('league', data);
+            // });
+            riot.getChampions(function(data) {
                 socket.emit('league', data);
             });
         });
